@@ -1,12 +1,17 @@
-﻿
-@*
-    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@if(TempData["success"] != null)
+﻿@if(TempData["success"] != null)
 {
-    <h2>@TempData["success"]</h2>
+    <script src = "~/lib/jquery/dist/jquey.min.js"></script>
+    <script src = "//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script type = "text/javascript">
+         toastr.success('@TempData["Success"]');
+    </script>
+   
 }
 @if(TempData["error"] != null)
 {
-    <h2>@TempData["error"]</h2>
+     <script src = "~/lib/jquery/dist/jquey.min.js"></script>
+    <script src = "//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+     <script type = "text/javascript">
+         toastr.error('@TempData["error"]');
+    </script>
 }
