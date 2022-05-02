@@ -3,6 +3,7 @@ using BulkyBook.DataAccess.Repository;
 using BulkyBook.DataAccess.Repository.IRepository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Hosting;
 
 var builder = WebApplication.CreateBuilder(args); 
 
@@ -18,11 +19,12 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(
             builder.Configuration.GetConnectionString("DefaulConnection")
     ));
-//builder.Services.AddDefaultIdentity<IdentityUser>()
-  //  .AddEntityFrameworkStores<ApplicationDbContext>();
-//builder.Services.AddScoped<ICategoryRepository, CategoryRepository>(); //replace by UnitOfWork
+builder.Services.AddDefaultIdentity<IdentityUser>()
+    .AddEntityFrameworkStores<ApplicationDbContext>();
+
+   //builder.Services.AddScoped<ICategoryRepository, CategoryRepository>(); //replace by UnitOfWork
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();//use for take care all the Repository
-//builder.Services.AddRazorPages().AddRazorRuntimeCompilation(); //for runtime compilation
+builder.Services.AddRazorPages().AddRazorRuntimeCompilation(); //for runtime compilation
 var app = builder.Build();
 
 
@@ -38,11 +40,13 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseAuthentication();
 
 app.UseAuthorization();
-//app.MapRazorPages();
+app.MapRazorPages();
+
 app.MapControllerRoute(
-    name: "default",
-    pattern: "{area=Customer}/{controller=Home}/{action=Index}/{id?}");
+   name: "default",
+   pattern: "{area=Customer}/{controller=Home}/{action=Index}/{id?}");
 
 app.Run();

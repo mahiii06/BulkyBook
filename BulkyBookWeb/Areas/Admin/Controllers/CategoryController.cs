@@ -3,9 +3,9 @@ using BulkyBook.DataAccess.Repository.IRepository;
 using BulkyBook.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace BulkyBookWeb.Controllers
-{
-    public class CategoryController : Controller
+namespace BulkyBookWeb.Controllers;
+[Area("Admin")]
+public class CategoryController : Controller
     {
         //private readonly ApplicationDbContext _db;
         //private readonly ICategoryRepository _db;
@@ -153,4 +153,3 @@ namespace BulkyBookWeb.Controllers
             return RedirectToAction("Index"); 
         }
     }
-}
