@@ -10,7 +10,7 @@ namespace BulkyBookWeb.Controllers;
 public class CompanyController : Controller
 {
     private readonly IUnitOfWork _unitOfWork;
-    private readonly IWebHostEnvironment _hostEnvironment;
+   
     public CompanyController(IUnitOfWork db)
     {
         _unitOfWork = db;
@@ -44,12 +44,12 @@ public class CompanyController : Controller
             if (obj.Id == 0)
             {
                 _unitOfWork.Company.Add(obj);
-                TempData["success"] = " Product added successfully";
+                TempData["success"] = " Company added successfully";
             }
             else
             {
                 _unitOfWork.Company.Update(obj);
-                TempData["success"] = " Product added successfully";
+                TempData["success"] = " Company updated successfully";
             }
 
             _unitOfWork.Save();
